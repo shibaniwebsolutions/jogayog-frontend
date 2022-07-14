@@ -9,7 +9,7 @@ const ServicesAdd = () => {
      return (
           <div>
                <Button  size='small' variant="contained" onClick={handleOpen}>
-                    New Service Category
+                    New Service
                </Button> 
                <ServicesModal open={open} handleClose={handleClose}></ServicesModal>
           </div>

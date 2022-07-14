@@ -10,7 +10,7 @@ const Services = () => {
      const token = localStorage.getItem('token')
      useEffect(()=>{
           setLoading(true)
-          fetch(`${Configs.baseUrl}admin/adminroute/service-category`, {
+          fetch(`${Configs.baseUrl}admin/adminroute/allservice`, {
                method: 'GET',
                headers: {
                'content-type': 'application/json',
@@ -32,7 +32,7 @@ const Services = () => {
      }
      return (
           <div>
-               <ServicesAdd></ServicesAdd>
+               {/* <ServicesAdd></ServicesAdd> */}
                <Service services={services}></Service>
           </div>
      );

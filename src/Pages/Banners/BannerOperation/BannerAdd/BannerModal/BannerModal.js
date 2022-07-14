@@ -36,6 +36,7 @@ const BannerModal = ({ open, handleClose }) => {
      const [name, setName] = useState('') 
      const [imgUrl,setImageUrl] = useState('')
      const [description,setDescription] = useState('')
+     const [loading, setLoading] = useState(false)
     
      const handleChange = e => {
           setStatus(e.target.value);
@@ -46,15 +47,24 @@ const BannerModal = ({ open, handleClose }) => {
           e.preventDefault()
      }
      const handleImageChange = async e=>{
+          setLoading(true)
           const file = e.target.files[0]
           console.log(file)
           const formData = new FormData()
           formData.append("file",file)
-          const res = await axios.post(`${Configs.baseUrl}upload`, formData, {
+          await axios.post(`${Configs.baseUrl}upload`, formData, {
                headers: {'content-type': 'multipart/form-data'}
            })
-           console.log(res.data.url)
-           setImageUrl(res.data.url)
+           .then((res)=>{
+                console.log(res.data.url)
+               setImageUrl(res.data.url)
+               setLoading(false)
+           })
+           .catch((err)=>{
+               console.log(err)
+               setLoading(false)
+           })
+           
           e.preventDefault()
      }
      const handleDescriptionChange = (e) =>{
@@ -65,6 +75,8 @@ const BannerModal = ({ open, handleClose }) => {
     
 
      const handleSubmit = e => {
+          if(name === ''){ return false; }
+          else if(imgUrl === ''){ return false; }
           const bannerInfo = {
                title: name,
                imgUrl,
@@ -84,6 +96,7 @@ const BannerModal = ({ open, handleClose }) => {
                .then(info => {
                     console.log(info);
                     handleClose();
+                    window.location.reload();
                });
           e.preventDefault()
      }
@@ -148,7 +161,10 @@ const BannerModal = ({ open, handleClose }) => {
                                    </Box>
 
                                    <Box sx={{mt:2, textAlign:'center'}}>
-                                        <input type="submit" />
+                                        {
+                                             loading ? <img style={{width: 60}} src='/loader.svg' /> : <input type="submit" />
+                                        }
+                                        
                                    </Box>
                               </form>
                          </Box>

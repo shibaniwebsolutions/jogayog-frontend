@@ -23,6 +23,12 @@ const VendorsLink = () => {
                          Customer
                     </Button>
                </Link>
+               <Link exact to="/vendors" style={{ textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ mb: 2, mr:2 }}>
+                         <VerifiedUserIcon sx={{mr:1}}></VerifiedUserIcon>
+                         Vendors
+                    </Button>
+               </Link>
                <Link exact to={`${url}/products`} style={{ textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ mb: 2 }}>
                          <ProductionQuantityLimitsIcon sx={{mr:1}}></ProductionQuantityLimitsIcon>
@@ -32,15 +38,10 @@ const VendorsLink = () => {
                <Link exact to={`${url}/categories`} style={{ textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ mb: 2,mr:1 }}>
                          <CategoryIcon sx={{mr:1}}></CategoryIcon>
-                         Category
+                        Product Category
                     </Button>
                </Link>
-               <Link exact to="/vendors" style={{ textDecoration: 'none' }}>
-                    <Button color="inherit" sx={{ mb: 2, mr:2 }}>
-                         <VerifiedUserIcon sx={{mr:1}}></VerifiedUserIcon>
-                         Vendors
-                    </Button>
-               </Link>
+             
                
                
                {/* <Link exact to={`${url}/contacts`} style={{ textDecoration: 'none' }}>
@@ -53,6 +54,12 @@ const VendorsLink = () => {
                     <Button color="inherit" sx={{ mb: 2,mr:1 }}>
                          <MiscellaneousServicesIcon sx={{mr:1}}></MiscellaneousServicesIcon>
                          Services
+                    </Button>
+               </Link>
+               <Link exact to={`${url}/services-category`} style={{ textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ mb: 2,mr:1 }}>
+                         <MiscellaneousServicesIcon sx={{mr:1}}></MiscellaneousServicesIcon>
+                         Services Category
                     </Button>
                </Link>
                

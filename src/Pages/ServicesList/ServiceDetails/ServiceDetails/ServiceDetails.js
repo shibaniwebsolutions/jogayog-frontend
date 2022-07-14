@@ -12,7 +12,7 @@ const ServiceDetails = ({service}) => {
           let id = service._id
           useEffect(()=>{
                setLoading(true)
-               fetch(`${Configs.baseUrl}admin/adminroute/service-category/${id}`, {
+               fetch(`${Configs.baseUrl}admin/adminroute/allservice/${id}`, {
                     method: 'GET',
                     headers: {
                     'content-type': 'application/json',

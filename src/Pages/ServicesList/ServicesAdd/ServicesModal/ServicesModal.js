@@ -6,8 +6,6 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import Configs from '../../../../Configs';
 
-
-
 const style = {
      position: 'absolute',
      top: '50%',
@@ -20,37 +18,26 @@ const style = {
      p: 4,
    };
 
-
-const CategoryModal = ({ open, handleClose }) => {
+const ServicesModal = ({ open, handleClose }) => {
      const token = localStorage.getItem('token')
      
      const [name, setName] = useState('') 
      const [imgUrl,setImageUrl] = useState('')
-     const [loading, setLoading] = useState(false)
 
      const handleNameChange = (e) =>{
           setName(e.target.value)
           e.preventDefault()
      }
      const handleImageChange = async(e) =>{
-          setLoading(true)
           const file = e.target.files[0]
           console.log(file)
           const formData = new FormData()
           formData.append("file",file)
-          await axios.post(`${Configs.baseUrl}upload`, formData, {
+          const res = await axios.post(`${Configs.baseUrl}upload`, formData, {
                headers: {'content-type': 'multipart/form-data'}
            })
-           .then((res)=>{
-               setLoading(false)
-               console.log(res.data.url)
-               setImageUrl(res.data.url)
-           })
-           .catch((err)=>{
-               console.log(false)
-               setLoading(false)
-           })
-           
+           console.log(res.data.url)
+           setImageUrl(res.data.url)
           e.preventDefault()
      }
      const handleSubmit = e => {
@@ -59,7 +46,7 @@ const CategoryModal = ({ open, handleClose }) => {
                imgUrl
           }
           console.log(category)
-          fetch(`${Configs.baseUrl}admin/adminroute/allcategory`, {
+          fetch(`${Configs.baseUrl}admin/adminroute/allservice`, {
                method: 'POST',
                headers: {
                     'content-type': 'application/json',
@@ -71,13 +58,12 @@ const CategoryModal = ({ open, handleClose }) => {
                .then(info => {
                     console.log(info);
                     handleClose();
-                    window.location.reload(); 
                });
           e.preventDefault()
      }
      return (
           <>
-               <Modal
+             <Modal
                     open={open}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
@@ -97,7 +83,7 @@ const CategoryModal = ({ open, handleClose }) => {
                                         variant="filled"
                                         />
 
-                                        <input 
+                                             <input 
                                              required 
                                              type="file"
                                              name ="file"
@@ -107,18 +93,16 @@ const CategoryModal = ({ open, handleClose }) => {
                                         
                                    </Box>
 
-                                   <Box sx={{ textAlign:'center',mt:2}}>
-                                        {
-                                             loading ? <img style={{width: 60}} src='/loader.svg' /> : <input type="submit" />
-                                        }
+                                   <Box sx={{ textAlign:'center'}}>
+                                        <input type="submit" />
                                    </Box>
                               </form>
                          </Box>
                     </Grid>
                </Box>
-               </Modal>      
+               </Modal>        
           </>
      );
 };
 
-export default CategoryModal;
+export default ServicesModal;

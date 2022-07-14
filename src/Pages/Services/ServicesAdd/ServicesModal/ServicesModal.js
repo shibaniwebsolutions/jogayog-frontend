@@ -22,6 +22,7 @@ const ServicesModal = ({ open, handleClose }) => {
      const token = localStorage.getItem('token')
      
      const [name, setName] = useState('') 
+     const [loading, setLoading] = useState(false) 
      const [imgUrl,setImageUrl] = useState('')
 
      const handleNameChange = (e) =>{
@@ -29,15 +30,24 @@ const ServicesModal = ({ open, handleClose }) => {
           e.preventDefault()
      }
      const handleImageChange = async(e) =>{
+          setLoading(true)
           const file = e.target.files[0]
-          console.log(file)
+          // console.log(file)
           const formData = new FormData()
           formData.append("file",file)
-          const res = await axios.post(`${Configs.baseUrl}upload`, formData, {
+          await axios.post(`${Configs.baseUrl}upload`, formData, {
                headers: {'content-type': 'multipart/form-data'}
            })
-           console.log(res.data.url)
-           setImageUrl(res.data.url)
+           .then((res)=>{
+               setLoading(false)
+               console.log(res.data.url)
+               setImageUrl(res.data.url)
+           })
+           .catch((err)=>{
+                console.log(err)
+               setLoading(false)
+           })
+           
           e.preventDefault()
      }
      const handleSubmit = e => {
@@ -45,8 +55,8 @@ const ServicesModal = ({ open, handleClose }) => {
                name: name,
                imgUrl
           }
-          console.log(category)
-          fetch(`${Configs.baseUrl}admin/adminroute/allservice`, {
+          // console.log(category)
+          fetch(`${Configs.baseUrl}admin/adminroute/service-category`, {
                method: 'POST',
                headers: {
                     'content-type': 'application/json',
@@ -58,6 +68,7 @@ const ServicesModal = ({ open, handleClose }) => {
                .then(info => {
                     console.log(info);
                     handleClose();
+                    window.location.reload(); 
                });
           e.preventDefault()
      }
@@ -94,7 +105,9 @@ const ServicesModal = ({ open, handleClose }) => {
                                    </Box>
 
                                    <Box sx={{ textAlign:'center'}}>
-                                        <input type="submit" />
+                                        {
+                                             loading ? <img style={{width: 60}} src='/loader.svg' /> : <input type="submit" />
+                                        }
                                    </Box>
                               </form>
                          </Box>

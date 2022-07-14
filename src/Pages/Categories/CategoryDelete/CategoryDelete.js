@@ -20,6 +20,7 @@ const CategoryDelete = ({category}) => {
                     console.log(data)
                     if(data.msg =="Deleted your this customer"){
                          alert ("Category deleted successfully")
+                         window.location.reload(); 
                     }else{
                          alert("Category not deleted")
                     }

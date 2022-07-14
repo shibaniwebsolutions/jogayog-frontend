@@ -22,6 +22,7 @@ const BannerDelete = ({banner}) => {
                     console.log(data)
                     if(data.msg ==  "Deleted a Banner"){
                          alert("Banner Deleted Successfully")
+                         window.location.reload();
                     }
                })
                e.preventDefault()

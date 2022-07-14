@@ -6,6 +6,7 @@ import  Typography  from '@mui/material/Typography';
 import Products from '../../Products/Products/Products';
 import Customers from '../../Customers/Customers/Customers';
 import Services from '../../Services/Services/Services';
+import ServicesList from '../../ServicesList/Services/Services';
 import Categories from '../../Categories/Categories/Categories';
 import Contacts from './../../Contacts/Contacts/Contacts';
 import Admin from '../../Admin/Admin/Admin';
@@ -36,6 +37,9 @@ const VendorsRoute = () => {
                                    <Contacts></Contacts>
                               </Route> */}
                               <Route exact path={`${path}/services`}>
+                                   <ServicesList></ServicesList>
+                              </Route>
+                              <Route exact path={`${path}/services-category`}>
                                    <Services></Services>
                               </Route>
                               
