@@ -10,7 +10,7 @@ const ServiceDelete = ({service}) => {
                var result = window.confirm("Want to delete?");
                if (result==true) {
                     // console.log('-->', id)
-                    fetch(`${Configs.baseUrl}admin/adminroute//${id}`, {
+                    fetch(`${Configs.baseUrl}admin/adminroute/service-category/${id}`, {
                          method: 'DELETE',
                          headers: {
                          'content-type': 'application/json',
