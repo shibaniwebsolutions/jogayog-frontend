@@ -69,6 +69,7 @@ const CategoryModal = ({ open, handleClose }) => {
                })
                .then(res => res.json())
                .then(info => {
+                    setImageUrl(')
                     console.log(info);
                     handleClose();
                     window.location.reload(); 
